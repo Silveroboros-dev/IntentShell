@@ -27,7 +27,7 @@ On screen:
 - brief overlay: `IntentShell — verify destructive commands before they run`
 
 Voiceover:
-- "IntentShell is a verification shell for destructive file operations."
+- "IntentShell is a command-line verification layer for destructive commands."
 
 ### 2. Show Fixture Repo (0:04-0:10)
 

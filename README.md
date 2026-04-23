@@ -2,13 +2,13 @@
 
 Before destructive commands run, verify they match intent.
 
-IntentShell is a deterministic verification shell for destructive file operations. For supported commands, it expands the exact target set before execution, checks those paths against the user's stated intent, shows violating paths, and proposes a narrower safe rewrite.
+IntentShell is a deterministic command-line verification layer for destructive commands. For supported commands, it expands the exact target set before execution, checks those paths against the user's stated intent, shows violating paths, and proposes a narrower safe rewrite.
 
 Unix can already reach the same final filesystem state with a carefully written command. IntentShell does not claim new execution power. It adds a deterministic verification step before destructive execution: intent becomes an explicit policy, the command's exact target set is expanded before execution, violating paths are surfaced, and a safer rewrite can be proposed and audited.
 
 ## What It Does
 
-IntentShell is a narrow verification shell utility for destructive file operations. The current MVP centers on a constrained subset of `rm`, with initial support for selected `mv` cases, and rejects unsupported destructive commands rather than guessing.
+IntentShell is a narrow command-line verification layer for destructive commands. The current MVP centers on a constrained subset of `rm`, with initial support for selected `mv` cases, and rejects unsupported destructive commands rather than guessing.
 
 Traditional shells check syntax and permissions, but they do not check whether a command matches what the user actually means.
 
@@ -131,6 +131,8 @@ IntentShell is being built for the [Rebuilding the OS: Core System Utilities Hac
 It fits the challenge as a command-line shell / terminal utility with one distinctive behavior: pre-execution intent verification for destructive file operations.
 
 ## Design Thesis
+
+This project grew out of a side project on how philosophy and software engineering can sharpen each other: philosophy helps articulate intent and categories, while software forces those ideas into explicit checks, policies, and execution constraints.
 
 Computers operate on syntax; humans act through meaning and categories. When a user says "delete only build artifacts," they are naming a semantic class, not just a pathname pattern.
 

@@ -10,25 +10,25 @@ Before destructive commands run, verify they match intent.
 
 ## One-line Description
 
-IntentShell is a deterministic verification shell for destructive file operations. For supported commands, it expands the exact target set before execution, checks those paths against the user's stated intent, shows violating paths, and proposes a narrower safe rewrite.
+IntentShell is a deterministic command-line verification layer for destructive commands. For supported commands, it expands the exact target set before execution, checks those paths against the user's stated intent, shows violating paths, and proposes a narrower safe rewrite.
 
 ## Inspiration
 
 Traditional shells are excellent at checking syntax and permissions, but they do not check whether a command matches what the user actually means.
 
-That gap matters most on destructive operations. A user may mean "delete only build artifacts" and still run a command that also touches source code, configuration, documentation, or user data. The shell sees a valid command and executes it.
+That gap is most dangerous in unfamiliar repositories, where a valid command can still remove source code, configuration, or documentation instead of only generated artifacts.
 
-IntentShell started from a simple question: can we add a verification layer between valid syntax and intended meaning?
+IntentShell started from a simple question: can a command-line verification layer verify destructive commands against stated intent before execution?
 
-IntentShell is especially useful for AI-assisted developers, new contributors, and agents operating in unfamiliar repositories. Their failure mode is often not syntax. It is issuing a valid destructive command without fully understanding the role of every affected path.
-
-There is also a deeper design thesis behind the project. Computers operate on syntax; humans act through semantic categories and intentions. When a user says "delete only build artifacts," they are naming a category, not just a pathname pattern. IntentShell is a small experiment in making that semantic layer operational inside a shell.
+The project also grew out of a side exploration of how philosophy and software engineering can sharpen each other: philosophy helps articulate semantic categories and intent, while software forces those ideas into explicit policies, checks, and execution constraints.
 
 ## What It Does
 
-IntentShell is a narrow verification shell utility for destructive file operations. The current MVP centers on a constrained subset of `rm`, with initial support for selected `mv` cases, and rejects unsupported destructive commands rather than guessing.
+IntentShell is a narrow command-line verification layer for destructive commands. The current MVP centers on a constrained subset of `rm`, with initial support for selected `mv` cases, and rejects unsupported destructive commands rather than guessing.
 
 Unix can already reach the same final filesystem state with a carefully written command. IntentShell does not claim new execution power. It adds a deterministic verification step before destructive execution: intent becomes an explicit policy, the command's exact target set is expanded before execution, violating paths are surfaced, and a safer rewrite can be proposed and audited.
+
+IntentShell is especially useful for AI-assisted developers, new contributors, and agents operating in unfamiliar repositories. It helps when someone can produce a valid destructive command before they fully understand the role of every affected path.
 
 The user enters:
 - a risky command

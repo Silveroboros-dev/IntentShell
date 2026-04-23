@@ -19,7 +19,7 @@ The tone should be calm, direct, and lightly technical. Let the terminal output 
 
 ### 0:00-0:04
 
-"IntentShell is a verification shell for destructive file operations."
+"IntentShell is a command-line verification layer for destructive commands."
 
 ### 0:04-0:10
 
@@ -59,4 +59,4 @@ The tone should be calm, direct, and lightly technical. Let the terminal output 
 
 ## One-Piece Read
 
-"IntentShell is a verification shell for destructive file operations. This repo contains generated artifacts, source code, configuration, and documentation. The user wants to delete only build artifacts, but this command is broader than that intent. For supported commands, IntentShell expands the exact target set before execution and turns that intent into an explicit policy. Here it detects that the command would also remove source code, configuration, and documentation, so the command is blocked. It then proposes a narrower safe rewrite that matches the stated intent. After approval, only the intended targets are deleted. Each verified run produces an audit trail, and supported deletes can be restored. This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands. Syntax is necessary. For destructive commands, it is not sufficient."
+"IntentShell is a command-line verification layer for destructive commands. This repo contains generated artifacts, source code, configuration, and documentation. The user wants to delete only build artifacts, but this command is broader than that intent. For supported commands, IntentShell expands the exact target set before execution and turns that intent into an explicit policy. Here it detects that the command would also remove source code, configuration, and documentation, so the command is blocked. It then proposes a narrower safe rewrite that matches the stated intent. After approval, only the intended targets are deleted. Each verified run produces an audit trail, and supported deletes can be restored. This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands. Syntax is necessary. For destructive commands, it is not sufficient."
