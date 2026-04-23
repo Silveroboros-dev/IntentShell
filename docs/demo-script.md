@@ -115,12 +115,12 @@ On screen:
 - `intentshell trash restore <operation-id>`
 
 Voiceover:
-- "Each verified run produces an audit trail, and supported deletes are recoverable."
+- "Each verified run produces an audit trail, and supported deletes can be restored."
 
 ### 9. Close (1:12-1:20)
 
 On screen:
-- `MVP now: rm subset, mv subset, deterministic checks, inspectable verification`
+- `MVP now: rm subset, initial mv support, deterministic checks, inspectable verification`
 - `Next: more intent policies, more risky commands`
 
 Voiceover:

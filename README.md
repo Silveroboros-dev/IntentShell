@@ -4,15 +4,11 @@ Before destructive commands run, verify they match intent.
 
 IntentShell is a deterministic verification shell for destructive file operations. For supported commands, it expands the exact target set before execution, checks those paths against the user's stated intent, shows violating paths, and proposes a narrower safe rewrite.
 
-## Hackathon Fit
-
-IntentShell is being built for the [Rebuilding the OS: Core System Utilities Hackathon](https://bitbuilders-code-race-apr-2026.devpost.com/).
-
-It fits the challenge as a command-line shell / terminal utility with one distinctive behavior: pre-execution intent verification for destructive file operations.
+Unix can already reach the same final filesystem state with a carefully written command. IntentShell does not claim new execution power. It adds a deterministic verification step before destructive execution: intent becomes an explicit policy, the command's exact target set is expanded before execution, violating paths are surfaced, and a safer rewrite can be proposed and audited.
 
 ## What It Does
 
-IntentShell is a narrow verification shell utility for destructive file operations. The current MVP supports constrained subsets of `rm` and `mv` commands and rejects unsupported destructive commands rather than guessing.
+IntentShell is a narrow verification shell utility for destructive file operations. The current MVP centers on a constrained subset of `rm`, with initial support for selected `mv` cases, and rejects unsupported destructive commands rather than guessing.
 
 Traditional shells check syntax and permissions, but they do not check whether a command matches what the user actually means.
 
@@ -20,7 +16,21 @@ That gap matters most on destructive operations. A user may mean "delete only bu
 
 IntentShell adds a verification layer between valid syntax and intended meaning.
 
+IntentShell is especially useful for AI-assisted developers, new contributors, and agents operating in unfamiliar repositories. Their failure mode is often not syntax. It is issuing a valid destructive command without fully understanding the role of every affected path.
+
 In the MVP, intent is turned into a small explicit policy rather than inferred loosely. For example, `delete only build artifacts` means every expanded target must be classified as a generated artifact. Any target outside that class is surfaced as a concrete violation before execution.
+
+Path classification in the MVP is deterministic and rule-based. Categories are assigned by explicit path and filename rules in the implementation, not by free-form language guessing.
+
+## Why Not Just Use Unix Directly?
+
+| Question | Plain Unix | IntentShell |
+| --- | --- | --- |
+| Can reach the same final safe delete? | Yes, if the user already knows the exact paths | Yes |
+| Checks a broad command against stated intent before execution? | No | Yes |
+| Shows violating paths and categories? | No | Yes |
+| Proposes a safer rewrite for supported cases? | Manual reasoning only | Yes |
+| Produces an audit trail and recovery flow inside the tool? | Ad hoc | Yes |
 
 The current MVP scope is intentionally narrow:
 - supported destructive command families: `rm`, `mv`
@@ -31,7 +41,17 @@ The current MVP scope is intentionally narrow:
 - narrower safe rewrite proposal
 - audit trace for every verified run
 - local trash / restore for supported deletes
-- structurally validated in-tree destinations for supported moves
+- supported moves run only after validating that the destination is an allowed location inside the working tree
+
+## Scope and Limitations
+
+- supports constrained subsets of `rm` and `mv` in the current MVP
+- supports a small explicit set of intent templates
+- rejects unsupported destructive commands rather than guessing
+- only governs commands executed inside IntentShell
+- acts as a guardrail for supported cases, not a general safety guarantee
+
+This narrow scope is deliberate: for destructive commands, predictable rejection is safer than broad but uncertain coverage.
 
 ## Demo Example
 
@@ -57,6 +77,33 @@ Verification result:
 
 Only the accepted safe rewrite is executed.
 
+CLI transcript:
+
+```text
+$ intentshell verify \
+    --cwd "$DEMO_DIR/repo" \
+    --command 'rm -rf ./*' \
+    --intent 'delete only build artifacts'
+command type: rm
+status: rewrite_required
+command: rm -rf ./*
+intent: delete only build artifacts
+policy: delete:generated_artifact
+allowed categories: generated artifact
+expanded targets:
+  - build [generated artifact] (matches a generated-artifact directory name)
+  - dist [generated artifact] (matches a generated-artifact directory name)
+  - coverage [generated artifact] (matches a generated-artifact directory name)
+  - src [source code] (lives in a source directory)
+  - config [configuration] (matches a config path pattern)
+  - README.md [documentation] (looks like project documentation)
+violations:
+  - src [source code] (lives in a source directory)
+  - config [configuration] (matches a config path pattern)
+  - README.md [documentation] (looks like project documentation)
+safe rewrite: rm -rf build dist coverage
+```
+
 ## How It Works
 
 IntentShell runs a fixed verification pipeline for supported commands:
@@ -69,13 +116,19 @@ IntentShell runs a fixed verification pipeline for supported commands:
 6. Propose a narrower safe rewrite.
 7. Execute only the accepted safe command.
 8. Write an auditable trace.
-9. Send supported deletes to local trash so they can be restored, and execute supported moves only after destination validation.
+9. Send supported deletes to local trash so they can be restored, and run supported moves only after validating that the destination is an allowed location inside the working tree.
 
 ## Why It's Different
 
 IntentShell is not just a custom shell, and it is not just deletion with recovery afterward.
 
 Its core claim is narrower and more distinctive: destructive commands should be checked against stated intent before execution, not only after the fact.
+
+## Hackathon Fit
+
+IntentShell is being built for the [Rebuilding the OS: Core System Utilities Hackathon](https://bitbuilders-code-race-apr-2026.devpost.com/).
+
+It fits the challenge as a command-line shell / terminal utility with one distinctive behavior: pre-execution intent verification for destructive file operations.
 
 ## Design Thesis
 
@@ -85,7 +138,7 @@ IntentShell is a small experiment in making that semantic layer operational insi
 
 ## Support Matrix
 
-Exact command support is documented in [docs/support-matrix.md](/Users/rk/Desktop/IntentShell/docs/support-matrix.md).
+Exact command support is documented in [docs/support-matrix.md](docs/support-matrix.md).
 
 ## Repository Layout
 

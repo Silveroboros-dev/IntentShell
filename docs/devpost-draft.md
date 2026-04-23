@@ -20,11 +20,15 @@ That gap matters most on destructive operations. A user may mean "delete only bu
 
 IntentShell started from a simple question: can we add a verification layer between valid syntax and intended meaning?
 
+IntentShell is especially useful for AI-assisted developers, new contributors, and agents operating in unfamiliar repositories. Their failure mode is often not syntax. It is issuing a valid destructive command without fully understanding the role of every affected path.
+
 There is also a deeper design thesis behind the project. Computers operate on syntax; humans act through semantic categories and intentions. When a user says "delete only build artifacts," they are naming a category, not just a pathname pattern. IntentShell is a small experiment in making that semantic layer operational inside a shell.
 
 ## What It Does
 
-IntentShell is a narrow verification shell utility for destructive file operations. The current MVP supports constrained subsets of `rm` and `mv` commands and rejects unsupported destructive commands rather than guessing.
+IntentShell is a narrow verification shell utility for destructive file operations. The current MVP centers on a constrained subset of `rm`, with initial support for selected `mv` cases, and rejects unsupported destructive commands rather than guessing.
+
+Unix can already reach the same final filesystem state with a carefully written command. IntentShell does not claim new execution power. It adds a deterministic verification step before destructive execution: intent becomes an explicit policy, the command's exact target set is expanded before execution, violating paths are surfaced, and a safer rewrite can be proposed and audited.
 
 The user enters:
 - a risky command
@@ -44,6 +48,8 @@ Fixture repo:
 
 In the MVP, intent is turned into a small explicit policy rather than inferred loosely. For example, `delete only build artifacts` means every expanded target must be classified as a generated artifact. Any target outside that class is surfaced as a concrete violation before execution.
 
+Path classification in the MVP is deterministic and rule-based. Categories are assigned by explicit path and filename rules in the implementation, not by free-form language guessing.
+
 IntentShell then runs a fixed verification pipeline:
 1. Parse the command.
 2. Expand the exact target set before execution.
@@ -53,17 +59,21 @@ IntentShell then runs a fixed verification pipeline:
 6. Propose a narrower safe rewrite.
 7. Execute only the accepted safe command.
 8. Write an auditable trace.
-9. Send supported deletes to local trash so they can be restored, and validate move destinations before executing supported moves.
+9. Send supported deletes to local trash so they can be restored, and run supported moves only after validating that the destination is an allowed location inside the working tree.
 
 In the example above, IntentShell flags `src/` as source code, `config/` as configuration, and `README.md` as documentation.
 
-It then proposes a narrower rewrite such as:
+It then proposes a narrower safe rewrite such as:
 
 ```bash
 rm -rf build dist coverage
 ```
 
 The point is not to replace the shell. The point is to verify whether destructive commands match intent before damage happens.
+
+IntentShell is intentionally narrow: it is a verifier for supported destructive commands, not a general AI shell.
+
+This narrow scope is deliberate: for destructive commands, predictable rejection is safer than broad but uncertain coverage.
 
 ## How I Built It
 
