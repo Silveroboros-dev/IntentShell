@@ -53,11 +53,7 @@ The tone should be calm, direct, and lightly technical. Let the terminal output 
 
 ### 1:52-2:02
 
-"This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands."
-
-### 2:02-2:06
-
-"Syntax is necessary. For destructive commands, it is not sufficient."
+"This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands. Syntax is necessary. For destructive commands, it is not sufficient."
 
 ## One-Piece Read
 

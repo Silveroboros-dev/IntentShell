@@ -27,6 +27,7 @@ IntentShell is pre-flight safety for dangerous file commands: it checks what wil
 - Target length: 110-125 seconds.
 - Open with a 10-second problem setup: OS commands can be valid without matching user intent.
 - Add one iMovie text overlay during the fixture-repo shot: `Valid command ≠ intended command`.
+- End with one simple title card: `Syntax is necessary. For destructive commands, it is not sufficient.`
 - Keep the optional `mv` proof as a short extra clip only if the main `rm` loop stays under time.
 
 ## iMovie Overlay
@@ -43,3 +44,12 @@ Recommended settings:
 - placement: lower-left or lower-third
 - color: white or light gray
 - motion: none or a simple fade
+
+## Final Card
+
+After the terminal shows `--- restored files ---`, cut to a simple black title card for about 8-10 seconds:
+
+```text
+Syntax is necessary.
+For destructive commands, it is not sufficient.
+```

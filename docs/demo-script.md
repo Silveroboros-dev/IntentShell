@@ -106,22 +106,16 @@ On screen:
 Voiceover:
 - "The same operation can be restored, which makes the verification trail inspectable and reversible for supported deletes."
 
-### 9. Close (1:52-2:02)
+### 9. Final Card (1:52-2:02)
 
 On screen:
-- `MVP now: rm subset, initial mv support, deterministic checks, inspectable verification`
-- `Next: more intent policies, more risky commands`
+```text
+Syntax is necessary.
+For destructive commands, it is not sufficient.
+```
 
 Voiceover:
-- "This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands."
-
-### 10. Final Card (2:02-2:06)
-
-On screen:
-- `Syntax is necessary. For destructive commands, it is not sufficient.`
-
-Voiceover:
-- "Syntax is necessary. For destructive commands, it is not sufficient."
+- "This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands. Syntax is necessary. For destructive commands, it is not sufficient."
 
 ## Submission Requirements Check
 
@@ -135,9 +129,22 @@ The recorded demo should make these points visible:
 
 Add the `Valid command ≠ intended command` line as an iMovie title above the terminal clip from roughly `0:05` to `0:10`.
 
-Recommended style:
+At the end, add a simple black title card from roughly `1:52` to `2:02` with:
+
+```text
+Syntax is necessary.
+For destructive commands, it is not sufficient.
+```
+
+Recommended overlay style:
 - simple title style, such as Standard or Lower
 - white or light gray text
 - lower-left or lower-third placement
 - no playful animation
 - duration around 4-5 seconds
+
+Recommended final-card style:
+- black background
+- centered white or light gray text
+- no playful animation
+- duration around 8-10 seconds
