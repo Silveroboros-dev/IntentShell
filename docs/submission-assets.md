@@ -24,7 +24,7 @@ IntentShell is pre-flight safety for dangerous file commands: it checks what wil
 
 - Use [demo-commands.md](demo-commands.md) for the exact terminal sequence.
 - Use [demo-voiceover.md](demo-voiceover.md) for the spoken track.
-- Target length: 95-110 seconds.
+- Target length: 110-125 seconds.
 - Open with a 10-second problem setup: OS commands can be valid without matching user intent.
 - Add one iMovie text overlay during the fixture-repo shot: `Valid command ≠ intended command`.
 - Keep the optional `mv` proof as a short extra clip only if the main `rm` loop stays under time.

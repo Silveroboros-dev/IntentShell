@@ -1,4 +1,4 @@
-# 100-Second Demo Script
+# 2-Minute Demo Script
 
 ## Goal
 
@@ -9,7 +9,7 @@ Exact terminal sequence: [demo-commands.md](/Users/rk/Desktop/IntentShell/docs/d
 
 ## Recording Length
 
-Target: 95-110 seconds.
+Target: 110-125 seconds.
 
 ## Recording Style
 
@@ -28,96 +28,85 @@ On screen:
 Voiceover:
 - "Operating systems are very good at checking whether a command is valid."
 
-### 2. Show Fixture Repo (0:05-0:10)
+### 2. Fixture Repo With Overlay (0:05-0:12)
 
 On screen:
-- `build/`
-- `dist/`
-- `coverage/`
-- `src/`
-- `config/`
-- `README.md`
+- terminal section: `--- fixture repo ---`
+- visible files: `build`, `dist`, `coverage`, `src`, `config`, `README.md`
 - iMovie overlay: `Valid command ≠ intended command`
 
 Voiceover:
 - "But they usually do not check whether it matches what the user meant."
 
-### 3. Enter Command And Intent (0:10-0:18)
+### 3. Verify Risky Command (0:12-0:38)
 
 On screen:
-
-```text
-command: rm -rf ./*
-intent: delete only build artifacts
-```
+- terminal section: `--- verify risky command ---`
+- command line includes `--command 'rm -rf ./*'`
+- command line includes `--intent 'delete only build artifacts'`
+- output shows `status: rewrite_required`
+- output shows `expanded targets:`
 
 Voiceover:
 - "That matters most for destructive file commands. Here, the user wants to delete only build artifacts, but the command is broader than that intent."
 
-### 4. Show Actual Verification State (0:18-0:35)
+### 4. Policy And Violations (0:38-0:58)
 
-On screen:
-
-```text
-Expanded targets:
-build  dist  coverage  src  config  README.md
-
-Intent policy:
-allowed category = generated artifacts only
-```
+On screen, in the same verification output:
+- `policy: delete:generated_artifact`
+- `allowed categories: generated artifact`
+- violations for `src`, `config`, and `README.md`
+- `safe rewrite: rm -rf build dist coverage`
 
 Voiceover:
 - "For supported commands, IntentShell expands the exact target set before execution and turns the intent into an explicit policy."
 
-### 5. Show Violations And Rewrite Requirement (0:35-0:50)
-
-On screen:
-
-```text
-Violations:
-src        -> source code
-config     -> configuration
-README.md  -> documentation
-
-Result: REWRITE REQUIRED — intent mismatch
-```
-
 Voiceover:
 - "Here it detects that the command would also remove source code, configuration, and documentation, so the broad command requires a rewrite before anything runs."
 
-### 6. Show Suggested Rewrite (0:50-1:00)
+### 5. Apply Safe Rewrite (0:58-1:14)
 
 On screen:
-
-```bash
-Suggested safe rewrite:
-rm -rf build dist coverage
-```
+- terminal section: `--- apply safe rewrite ---`
+- command includes `--apply safe`
+- output shows `safe rewrite: rm -rf build dist coverage`
+- output shows `executed: moved 3 path(s) to local trash`
 
 Voiceover:
-- "It then proposes a narrower safe rewrite that matches the stated intent."
+- "It then proposes and applies a narrower safe rewrite that matches the stated intent."
 
-### 7. Execute And Prove Result (1:00-1:12)
+### 6. Prove What Remains (1:14-1:24)
 
 On screen:
-- accept rewrite
-- run command
-- show remaining files: `src/`, `config/`, `README.md`
+- terminal section: `--- remaining files ---`
+- visible result: `README.md`, `config`, `src`
 
 Voiceover:
 - "After approval, only the intended targets are deleted."
 
-### 8. Show Audit And Restore (1:12-1:28)
+### 7. Audit And Trash (1:24-1:40)
 
 On screen:
-- `intentshell audit show latest`
-- `intentshell trash list`
-- `intentshell trash restore <operation-id>`
+- terminal section: `--- audit trail ---`
+- audit output shows the same command, violations, safe rewrite, and execution record
+- terminal section: `--- local trash ---`
+- trash output shows `build, dist, coverage`
 
 Voiceover:
-- "Each verified run produces an audit trail, and supported deletes can be restored."
+- "Each verified run produces an audit trail, and supported deletes go to local trash."
 
-### 9. Close (1:28-1:38)
+### 8. Restore Deleted Artifacts (1:40-1:52)
+
+On screen:
+- terminal section: `--- restore deleted artifacts ---`
+- output shows `Restored 3 path(s)`
+- terminal section: `--- restored files ---`
+- visible result: `README.md`, `build`, `config`, `coverage`, `dist`, `src`
+
+Voiceover:
+- "The same operation can be restored, which makes the verification trail inspectable and reversible for supported deletes."
+
+### 9. Close (1:52-2:02)
 
 On screen:
 - `MVP now: rm subset, initial mv support, deterministic checks, inspectable verification`
@@ -126,7 +115,7 @@ On screen:
 Voiceover:
 - "This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands."
 
-### 10. Final Card (1:38-1:42)
+### 10. Final Card (2:02-2:06)
 
 On screen:
 - `Syntax is necessary. For destructive commands, it is not sufficient.`
