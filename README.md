@@ -150,8 +150,14 @@ Current structure:
 IntentShell/
   README.md
   docs/
-    devpost-draft.md
+    assets/
+      devpost-thumbnail.png
+    demo-commands.md
     demo-script.md
+    demo-voiceover.md
+    devpost-draft.md
+    submission-assets.md
+    support-matrix.md
   fixtures/
     demo_repo/
   src/
@@ -161,10 +167,12 @@ IntentShell/
 
 ## Run Instructions
 
-Install the package in editable mode:
+Create an isolated environment and install the package:
 
 ```bash
-python3 -m pip install -e .
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install .
 ```
 
 Prepare a disposable demo workspace:
@@ -230,7 +238,7 @@ intentshell audit show latest --cwd "$DEMO_DIR/repo"
 Run the automated checks:
 
 ```bash
-python3 -m unittest discover -s tests -v
+PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
 IntentShell writes local state inside the working directory:

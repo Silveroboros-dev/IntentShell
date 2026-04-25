@@ -13,9 +13,11 @@ Run these before you start recording:
 
 ```bash
 cd /Users/rk/Desktop/IntentShell
-python3 -m pip install -e .
-
 export RECORD_ROOT="$(mktemp -d /tmp/intentshell-recording.XXXXXX)"
+python3 -m venv "$RECORD_ROOT/.venv"
+source "$RECORD_ROOT/.venv/bin/activate"
+python3 -m pip install .
+
 export RM_REPO="$RECORD_ROOT/rm"
 export MV_REPO="$RECORD_ROOT/mv"
 
@@ -31,9 +33,14 @@ Recommended:
 - keep the terminal full-screen
 - start the recording with the terminal already open in `$RM_REPO`
 
-## Primary 80-Second Recording
+## Primary Recording
 
-This is the main proof loop: block, rewrite, execute, audit, restore.
+This is the main proof loop: mismatch, rewrite, execute, audit, restore.
+
+Before the first terminal command appears, use a 10-second intro in the edit:
+- show [docs/assets/devpost-thumbnail.png](assets/devpost-thumbnail.png) for the first few seconds
+- show the fixture repo with an iMovie overlay: `Valid command ≠ intended command`
+- then continue with the terminal sequence below
 
 ### 1. Show the fixture repo
 
@@ -42,7 +49,7 @@ cd "$RM_REPO"
 ls -1
 ```
 
-### 2. Show the blocked verification
+### 2. Show the rewrite-required verification
 
 ```bash
 intentshell verify \

@@ -10,53 +10,53 @@ The tone should be calm, direct, and lightly technical. Let the terminal output 
 
 ## Delivery Notes
 
-- Aim for about 75-85 seconds total.
+- Aim for about 95-110 seconds total.
 - Pause briefly after each command so the on-screen output can land.
-- Stress `blocked`, `intent`, `policy`, and `rewrite`.
+- Stress `intent`, `policy`, `rewrite`, and `before anything runs`.
 - Keep the ending crisp. Do not add extra explanation after the final line.
 
 ## Timed Script
 
-### 0:00-0:04
+### 0:00-0:05
 
-"IntentShell is a command-line verification layer for destructive commands."
+"Operating systems are very good at checking whether a command is valid."
 
-### 0:04-0:10
+### 0:05-0:10
 
-"This repo contains generated artifacts, source code, configuration, and documentation."
+"But they usually do not check whether it matches what the user meant."
 
 ### 0:10-0:18
 
-"The user wants to delete only build artifacts, but this command is broader than that intent."
+"That matters most for destructive file commands. Here, the user wants to delete only build artifacts, but the command is broader than that intent."
 
-### 0:18-0:30
+### 0:18-0:35
 
 "For supported commands, IntentShell expands the exact target set before execution and turns that intent into an explicit policy."
 
-### 0:30-0:42
+### 0:35-0:50
 
-"Here it detects that the command would also remove source code, configuration, and documentation, so the command is blocked."
+"Here it detects that the command would also remove source code, configuration, and documentation, so the broad command requires a rewrite before anything runs."
 
-### 0:42-0:52
+### 0:50-1:00
 
 "It then proposes a narrower safe rewrite that matches the stated intent."
 
-### 0:52-1:02
+### 1:00-1:12
 
 "After approval, only the intended targets are deleted."
 
-### 1:02-1:12
+### 1:12-1:28
 
 "Each verified run produces an audit trail, and supported deletes can be restored."
 
-### 1:12-1:20
+### 1:28-1:38
 
 "This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands."
 
-### 1:20-1:24
+### 1:38-1:42
 
 "Syntax is necessary. For destructive commands, it is not sufficient."
 
 ## One-Piece Read
 
-"IntentShell is a command-line verification layer for destructive commands. This repo contains generated artifacts, source code, configuration, and documentation. The user wants to delete only build artifacts, but this command is broader than that intent. For supported commands, IntentShell expands the exact target set before execution and turns that intent into an explicit policy. Here it detects that the command would also remove source code, configuration, and documentation, so the command is blocked. It then proposes a narrower safe rewrite that matches the stated intent. After approval, only the intended targets are deleted. Each verified run produces an audit trail, and supported deletes can be restored. This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands. Syntax is necessary. For destructive commands, it is not sufficient."
+"Operating systems are very good at checking whether a command is valid. But they usually do not check whether it matches what the user meant. That matters most for destructive file commands. Here, the user wants to delete only build artifacts, but the command is broader than that intent. For supported commands, IntentShell expands the exact target set before execution and turns that intent into an explicit policy. Here it detects that the command would also remove source code, configuration, and documentation, so the broad command requires a rewrite before anything runs. It then proposes a narrower safe rewrite that matches the stated intent. After approval, only the intended targets are deleted. Each verified run produces an audit trail, and supported deletes can be restored. This is not a general AI shell. It is a narrow, inspectable verification layer for destructive commands. Syntax is necessary. For destructive commands, it is not sufficient."

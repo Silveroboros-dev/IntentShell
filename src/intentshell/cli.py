@@ -364,3 +364,7 @@ def _select_audit_record(records: list[dict[str, object]], target: str) -> dict[
     if index > len(reversed_records):
         raise ValueError(f"Audit target index {index} is out of range; only {len(reversed_records)} record(s) exist.")
     return reversed_records[index - 1]
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

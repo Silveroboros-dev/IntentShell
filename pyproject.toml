@@ -7,7 +7,7 @@ name = "intentshell"
 version = "0.1.0"
 description = "Before destructive commands run, verify they match intent."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 authors = [{name = "IntentShell"}]
 license = {text = "MIT"}
 dependencies = []
