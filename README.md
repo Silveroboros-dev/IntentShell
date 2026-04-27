@@ -1,26 +1,26 @@
 # IntentShell
 
-Before destructive commands run, verify they match intent.
+Before destructive file commands run, verify they match intent.
 
-IntentShell is a deterministic command-line verification layer for destructive commands. For supported commands, it expands the exact target set before execution, checks those paths against the user's stated intent, shows violating paths, and proposes a narrower safe rewrite.
+IntentShell is a deterministic command-line verification layer for destructive file commands. For supported commands, it expands the exact command target set before execution, checks those paths against the user's stated intent, shows violating paths, and proposes a narrower safe rewrite.
 
-Unix can already reach the same final filesystem state with a carefully written command. IntentShell does not claim new execution power. It adds a deterministic verification step before destructive execution: intent becomes an explicit policy, the command's exact target set is expanded before execution, violating paths are surfaced, and a safer rewrite can be proposed and audited.
+Unix can already reach the same final filesystem state with a carefully written command. IntentShell does not claim new execution power. It adds a deterministic verification step before destructive execution: intent becomes an explicit policy, the command's target set is expanded before execution, violating paths are surfaced, and a safer rewrite can be proposed and audited.
 
 ## What It Does
 
-IntentShell is a narrow command-line verification layer for destructive commands. The current MVP centers on a constrained subset of `rm`, with initial support for selected `mv` cases, and rejects unsupported destructive commands rather than guessing.
+IntentShell is a narrow command-line verification layer for destructive file commands. The current MVP centers on a constrained subset of `rm`, with initial support for selected `mv` cases, and rejects unsupported destructive file commands rather than guessing.
 
-Traditional shells check syntax and permissions, but they do not check whether a command matches what the user actually means.
+Traditional command execution checks syntax, resolves paths, and relies on filesystem permissions, but it does not check whether a command matches what the user actually means.
 
-That gap matters most on destructive operations. A user may mean "delete only build artifacts" and still run a command that also touches source code, configuration, documentation, or user data. The shell sees a valid command and executes it.
+That gap matters most on destructive file operations. A user may mean "delete only build artifacts" and still run a command that also touches source code, configuration, documentation, or user data. The shell sees a valid command and executes it.
 
 IntentShell adds a verification layer between valid syntax and intended meaning.
 
-IntentShell is especially useful for AI-assisted developers, new contributors, and agents operating in unfamiliar repositories. Their failure mode is often not syntax. It is issuing a valid destructive command without fully understanding the role of every affected path.
+IntentShell is especially useful for AI-assisted developers, new contributors, and agents operating in unfamiliar repositories. Their failure mode is often not syntax. It is issuing a valid destructive file command without fully understanding the role of every affected path.
 
 In the MVP, intent is turned into a small explicit policy rather than inferred loosely. For example, `delete only build artifacts` means every expanded target must be classified as a generated artifact. Any target outside that class is surfaced as a concrete violation before execution.
 
-Path classification in the MVP is deterministic and rule-based. Categories are assigned by explicit path and filename rules in the implementation, not by free-form language guessing.
+Path classification in the MVP is deterministic and rule-based. Categories are assigned by explicit path and filename rules documented in the support matrix and implementation, not by free-form language guessing.
 
 ## Why Not Just Use Unix Directly?
 
@@ -47,11 +47,11 @@ The current MVP scope is intentionally narrow:
 
 - supports constrained subsets of `rm` and `mv` in the current MVP
 - supports a small explicit set of intent templates
-- rejects unsupported destructive commands rather than guessing
+- rejects unsupported destructive file commands rather than guessing
 - only governs commands executed inside IntentShell
 - acts as a guardrail for supported cases, not a general safety guarantee
 
-This narrow scope is deliberate: for destructive commands, predictable rejection is safer than broad but uncertain coverage.
+This narrow scope is deliberate: for destructive file commands, predictable rejection is safer than broad but uncertain coverage.
 
 ## Demo Example
 
@@ -109,9 +109,9 @@ safe rewrite: rm -rf build dist coverage
 IntentShell runs a fixed verification pipeline for supported commands:
 
 1. Parse the command.
-2. Expand the exact target set before execution.
+2. Expand the exact command target set before execution.
 3. Classify affected paths into explicit categories such as generated artifacts, source code, configuration, documentation, logs, secrets, and user data.
-4. Check the expanded target set against a small, explicit intent policy.
+4. Check the expanded command target set against a small, explicit intent policy.
 5. If the command is too broad, show concrete violating paths.
 6. Propose a narrower safe rewrite.
 7. Execute only the accepted safe command.
@@ -122,7 +122,7 @@ IntentShell runs a fixed verification pipeline for supported commands:
 
 IntentShell is not just a custom shell, and it is not just deletion with recovery afterward.
 
-Its core claim is narrower and more distinctive: destructive commands should be checked against stated intent before execution, not only after the fact.
+Its core claim is narrower and more distinctive: destructive file commands should be checked against stated intent before execution, not only after the fact.
 
 ## Hackathon Fit
 
@@ -205,7 +205,7 @@ intentshell verify \
   --apply safe
 ```
 
-Try the same flow with a narrowed `mv` command:
+Try the same flow with a broad `mv` command that should be narrowed:
 
 ```bash
 mkdir "$DEMO_DIR/repo/archive"
@@ -257,4 +257,4 @@ Available now:
 
 ## Closing Line
 
-Syntax is necessary. For destructive commands, it is not sufficient.
+Syntax is necessary. For destructive file commands, it is not sufficient.
