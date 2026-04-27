@@ -37,10 +37,12 @@ Recommended:
 
 This is the main proof loop: mismatch, rewrite, execute, audit, restore. Each command starts with a visible section label so the recording is easy to follow.
 
-Before the first terminal command appears, use a 10-second intro in the edit:
-- show [docs/assets/devpost-thumbnail.png](assets/devpost-thumbnail.png) for the first few seconds
-- show the fixture repo with an iMovie overlay: `Valid command ≠ intended command`
-- then continue with the terminal sequence below
+Before the first terminal command appears, use the edit-only opening from [demo-script.md](/Users/rk/Desktop/IntentShell/docs/demo-script.md):
+- show [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png) for 5-7 seconds
+- show [docs/assets/devpost-thumbnail.png](assets/devpost-thumbnail.png) for about 5 seconds
+- then begin the terminal sequence below with the fixture repo
+
+The iMovie overlay `Valid command ≠ intended command` belongs on the fixture repo shot, after the first command below prints the file list.
 
 ### 1. Show the fixture repo
 

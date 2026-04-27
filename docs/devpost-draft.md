@@ -18,6 +18,8 @@ Traditional shells are excellent at checking syntax and permissions, but they do
 
 That gap is most dangerous in unfamiliar repositories, where a valid command can still remove source code, configuration, or documentation instead of only generated artifacts.
 
+Recent reported AI-agent data-loss incidents show the same broader failure pattern: destructive actions can be valid and authorized, but still violate developer intent. One example was covered by Financial Express on April 27, 2026: https://www.financialexpress.com/life/technology-ai-agent-just-destroyed-our-production-data-and-confessed-in-writing-founder-rings-alarm-bells-4219256/
+
 IntentShell started from a simple question: can a command-line verification layer verify destructive commands against stated intent before execution?
 
 The project also grew out of a side exploration of how philosophy and software engineering can sharpen each other: philosophy helps articulate semantic categories and intent, while software forces those ideas into explicit policies, checks, and execution constraints.
