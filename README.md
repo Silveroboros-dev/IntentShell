@@ -152,6 +152,7 @@ IntentShell/
   docs/
     assets/
       devpost-thumbnail.png
+      financial-express-context-16x9.png
     demo-commands.md
     demo-script.md
     demo-voiceover.md

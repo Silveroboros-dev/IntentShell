@@ -13,31 +13,35 @@ IntentShell is pre-flight safety for dangerous file commands: it checks what wil
 ## Article Context Card
 
 - File: [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png)
-- Use as a 5-7 second opening still in the demo video.
+- Use as a 4-5 second opening still in the demo video.
 - Purpose: problem validation for the broader failure pattern, not a claim that the current MVP would have stopped that exact API/database incident.
 
 ## Recommended Devpost Screenshots
 
-1. Problem context
-   - Use [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png) only as context, not as the project thumbnail.
-   - Include the article link near it:
-     `https://www.financialexpress.com/life/technology-ai-agent-just-destroyed-our-production-data-and-confessed-in-writing-founder-rings-alarm-bells-4219256/`
-   - Suggested caption: `Recent AI-agent incidents show the broader failure pattern: destructive actions can be valid, authorized, and still misaligned with developer intent.`
-
-2. Verification mismatch
+1. Verification mismatch
    - Capture the terminal after the first `intentshell verify` command in [demo-commands.md](demo-commands.md).
    - Keep `status: rewrite_required`, the `violations:` block, and `safe rewrite: rm -rf build dist coverage` visible.
+
+2. Safe execution proof
+   - Capture the terminal after the `--apply safe` command and `--- remaining files ---`.
+   - Keep `executed: moved 3 path(s) to local trash` and the remaining files `README.md`, `config`, and `src` visible.
 
 3. Audit and recovery proof
    - Capture either `intentshell audit show latest --cwd "$RM_REPO"` or `intentshell trash list --cwd "$RM_REPO"`.
    - This supports the claim that verified runs are inspectable and supported deletes can be restored.
 
+4. Optional problem context
+   - Use [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png) only as context, not as the project thumbnail.
+   - Include the article link near it:
+     `https://www.financialexpress.com/life/technology-ai-agent-just-destroyed-our-production-data-and-confessed-in-writing-founder-rings-alarm-bells-4219256/`
+   - Suggested caption: `Recent AI-agent incidents show the broader failure pattern: destructive actions can be valid, authorized, and still misaligned with developer intent.`
+
 ## Video Notes
 
 - Use [demo-commands.md](demo-commands.md) for the exact terminal sequence.
 - Use [demo-voiceover.md](demo-voiceover.md) for the spoken track.
-- Target length: 120-135 seconds.
-- Open with a 5-7 second article-context card using [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png).
+- Target length: 115-130 seconds.
+- Open with a 4-5 second article-context card using [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png).
 - Use the article as problem validation, not as a claim that the current MVP would have stopped that exact API/database incident.
 - Add one iMovie text overlay during the fixture-repo shot: `Valid command ≠ intended command`.
 - End with one simple title card: `Syntax is necessary. For destructive commands, it is not sufficient.`
@@ -55,7 +59,7 @@ https://www.financialexpress.com/life/technology-ai-agent-just-destroyed-our-pro
 Suggested wording:
 
 ```text
-A recent reported AI-agent data-loss incident illustrates the broader problem: destructive actions can be valid and authorized, but still violate developer intent. IntentShell starts with a narrow, inspectable version of the missing safety layer: pre-execution verification for destructive file commands.
+A recent reported AI-agent data-loss incident illustrates the broader problem: destructive actions can be technically valid and authorized, but still misaligned with developer intent. IntentShell does not claim to prevent that exact database/API incident; it starts with a narrow, inspectable version of the missing safety layer: pre-execution verification for destructive file commands.
 ```
 
 ## iMovie Overlay

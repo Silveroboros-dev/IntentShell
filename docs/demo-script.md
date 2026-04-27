@@ -4,12 +4,12 @@
 
 Make the demo feel like live proof, not a slide presentation: real-world problem signal, OS-level gap, bad command, intent mismatch, rewrite required, safer rewrite, execution, audit, restore.
 
-Companion spoken track: [demo-voiceover.md](/Users/rk/Desktop/IntentShell/docs/demo-voiceover.md).
-Exact terminal sequence: [demo-commands.md](/Users/rk/Desktop/IntentShell/docs/demo-commands.md).
+Companion spoken track: [demo-voiceover.md](demo-voiceover.md).
+Exact terminal sequence: [demo-commands.md](demo-commands.md).
 
 ## Recording Length
 
-Target: 120-135 seconds.
+Target: 115-130 seconds.
 
 ## Recording Style
 
@@ -21,29 +21,29 @@ Target: 120-135 seconds.
 
 ## Recording Checklist
 
-### 1. Real-World Context (0:00-0:07)
+### 1. Real-World Context (0:00-0:05)
 
 On screen:
-- show [docs/assets/financial-express-context-16x9.png](/Users/rk/Desktop/IntentShell/docs/assets/financial-express-context-16x9.png)
+- show [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png)
 - use it as a full-frame 16:9 still
 
 Voiceover:
-- "A recent AI-agent data-loss story made the gap concrete: a destructive action can be valid and authorized, but still violate the developer's intent."
+- "A recent reported AI-agent data-loss incident made the broader gap concrete: a destructive action can be technically authorized, but still violate intent."
 
 Editing note:
 - Include the article link in the Devpost write-up or video description:
   `https://www.financialexpress.com/life/technology-ai-agent-just-destroyed-our-production-data-and-confessed-in-writing-founder-rings-alarm-bells-4219256/`
 - Do not imply the current IntentShell MVP would have prevented that database/API incident. Use it as problem validation for the same failure pattern.
 
-### 2. Title Card And OS Problem (0:07-0:12)
+### 2. Title Card And OS Problem (0:05-0:10)
 
 On screen:
-- show [docs/assets/devpost-thumbnail.png](/Users/rk/Desktop/IntentShell/docs/assets/devpost-thumbnail.png)
+- show [docs/assets/devpost-thumbnail.png](assets/devpost-thumbnail.png)
 
 Voiceover:
-- "IntentShell starts with a narrower version of that problem: destructive file commands."
+- "IntentShell starts with a narrow OS-level version of that problem: destructive file commands."
 
-### 3. Fixture Repo With Overlay (0:12-0:19)
+### 3. Fixture Repo With Overlay (0:10-0:17)
 
 On screen:
 - terminal section: `--- fixture repo ---`
@@ -53,7 +53,7 @@ On screen:
 Voiceover:
 - "Operating systems are good at checking syntax and permissions. They usually do not check whether a command matches what the user meant."
 
-### 4. Verify Risky Command (0:19-0:45)
+### 4. Verify Risky Command (0:17-0:43)
 
 On screen:
 - terminal section: `--- verify risky command ---`
@@ -65,7 +65,7 @@ On screen:
 Voiceover:
 - "That matters most for destructive file commands. Here, the user wants to delete only build artifacts, but the command is broader than that intent."
 
-### 5. Policy And Violations (0:45-1:05)
+### 5. Policy And Violations (0:43-1:03)
 
 On screen, in the same verification output:
 - `policy: delete:generated_artifact`
@@ -79,7 +79,7 @@ Voiceover:
 Voiceover:
 - "Here it detects that the command would also remove source code, configuration, and documentation, so the broad command requires a rewrite before anything runs."
 
-### 6. Apply Safe Rewrite (1:05-1:21)
+### 6. Apply Safe Rewrite (1:03-1:19)
 
 On screen:
 - terminal section: `--- apply safe rewrite ---`
@@ -90,7 +90,7 @@ On screen:
 Voiceover:
 - "It then proposes and applies a narrower safe rewrite that matches the stated intent."
 
-### 7. Prove What Remains (1:21-1:31)
+### 7. Prove What Remains (1:19-1:29)
 
 On screen:
 - terminal section: `--- remaining files ---`
@@ -99,7 +99,7 @@ On screen:
 Voiceover:
 - "After approval, only the intended targets are deleted."
 
-### 8. Audit And Trash (1:31-1:47)
+### 8. Audit And Trash (1:29-1:45)
 
 On screen:
 - terminal section: `--- audit trail ---`
@@ -110,7 +110,7 @@ On screen:
 Voiceover:
 - "Each verified run produces an audit trail, and supported deletes go to local trash."
 
-### 9. Restore Deleted Artifacts (1:47-1:59)
+### 9. Restore Deleted Artifacts (1:45-1:57)
 
 On screen:
 - terminal section: `--- restore deleted artifacts ---`
@@ -119,9 +119,9 @@ On screen:
 - visible result: `README.md`, `build`, `config`, `coverage`, `dist`, `src`
 
 Voiceover:
-- "The same operation can be restored, which makes the verification trail inspectable and reversible for supported deletes."
+- "The audit trail is inspectable, and supported deletes can be restored."
 
-### 10. Final Card (1:59-2:09)
+### 10. Final Card (1:57-2:07)
 
 On screen:
 ```text
@@ -142,11 +142,11 @@ The recorded demo should make these points visible:
 
 ## iMovie Overlay Note
 
-Add [docs/assets/financial-express-context-16x9.png](/Users/rk/Desktop/IntentShell/docs/assets/financial-express-context-16x9.png) as a short opening still from roughly `0:00` to `0:07`, and put the article URL in the Devpost write-up or video description.
+Add [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png) as a short opening still from roughly `0:00` to `0:05`, and put the article URL in the Devpost write-up or video description.
 
-Add the `Valid command ≠ intended command` line as an iMovie title above the terminal clip from roughly `0:12` to `0:17`.
+Add the `Valid command ≠ intended command` line as an iMovie title above the terminal clip from roughly `0:10` to `0:15`.
 
-At the end, add a simple black title card from roughly `1:59` to `2:09` with:
+At the end, add a simple black title card from roughly `1:57` to `2:07` with:
 
 ```text
 Syntax is necessary.

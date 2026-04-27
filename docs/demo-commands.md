@@ -2,17 +2,16 @@
 
 Use this with:
 
-- [demo-script.md](/Users/rk/Desktop/IntentShell/docs/demo-script.md)
-- [demo-voiceover.md](/Users/rk/Desktop/IntentShell/docs/demo-voiceover.md)
+- [demo-script.md](demo-script.md)
+- [demo-voiceover.md](demo-voiceover.md)
 
 The goal is to make recording deterministic and easy to repeat.
 
 ## Off-Camera Prep
 
-Run these before you start recording:
+Run these before you start recording from the IntentShell repo root:
 
 ```bash
-cd /Users/rk/Desktop/IntentShell
 export RECORD_ROOT="$(mktemp -d /tmp/intentshell-recording.XXXXXX)"
 python3 -m venv "$RECORD_ROOT/.venv"
 source "$RECORD_ROOT/.venv/bin/activate"
@@ -37,8 +36,8 @@ Recommended:
 
 This is the main proof loop: mismatch, rewrite, execute, audit, restore. Each command starts with a visible section label so the recording is easy to follow.
 
-Before the first terminal command appears, use the edit-only opening from [demo-script.md](/Users/rk/Desktop/IntentShell/docs/demo-script.md):
-- show [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png) for 5-7 seconds
+Before the first terminal command appears, use the edit-only opening from [demo-script.md](demo-script.md):
+- show [docs/assets/financial-express-context-16x9.png](assets/financial-express-context-16x9.png) for 4-5 seconds
 - show [docs/assets/devpost-thumbnail.png](assets/devpost-thumbnail.png) for about 5 seconds
 - then begin the terminal sequence below with the fixture repo
 
@@ -150,7 +149,6 @@ find "$MV_REPO" -maxdepth 2 -mindepth 1 ! -path '*/.intentshell*' | sort
 If you want a fresh recording workspace, rerun only this setup block:
 
 ```bash
-cd /Users/rk/Desktop/IntentShell
 export RECORD_ROOT="$(mktemp -d /tmp/intentshell-recording.XXXXXX)"
 python3 -m venv "$RECORD_ROOT/.venv"
 source "$RECORD_ROOT/.venv/bin/activate"
