@@ -6,3 +6,13 @@ __pycache__/
 /dist/
 *.egg-info/
 .pytest_cache/
+
+# Local submission prep / handoff notes.
+AGENTS.md
+docs/session-handoff.md
+docs/demo-commands.md
+docs/demo-script.md
+docs/demo-voiceover.md
+docs/devpost-draft.md
+docs/submission-assets.md
+docs/assets/financial-express-context-16x9.png

@@ -152,12 +152,6 @@ IntentShell/
   docs/
     assets/
       devpost-thumbnail.png
-      financial-express-context-16x9.png
-    demo-commands.md
-    demo-script.md
-    demo-voiceover.md
-    devpost-draft.md
-    submission-assets.md
     support-matrix.md
   fixtures/
     demo_repo/
